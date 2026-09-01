@@ -1,25 +1,24 @@
+// C++ code
+//
 
-#include <Servo.h>
-
-Servo servoMotor;
-  
-int potenciometro = A0;
-
-int valorLido;
-int angulo;
+int pinoLED = 6;
+int sensorPIR = 7;
+bool estado = false;
 
 void setup()
 {
-  servoMotor .attach(9);
+  pinMode(pinoLED, OUTPUT);
+  pinMode(sensorPIR, INPUT);
 }
 
 void loop()
 {
-  
-  valorLido = analogRead(potenciometro);
-  angulo = map(valorLido, 0, 1023, 0, 180);
-  servoMotor .write(angulo);
-  
-  delay(1);
+  estado = digitalRead(sensorPIR);
 
+  if (estado == HIGH) {
+    digitalWrite(pinoLED, HIGH);
+    delay(5000);
+  } else {
+    digitalWrite(pinoLED, LOW);
+  }
 }
